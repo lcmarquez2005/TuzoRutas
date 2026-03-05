@@ -1,25 +1,38 @@
 import React from 'react';
+import './global.css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text } from 'react-native';
-import { ScreenContent } from './components/ScreenContent'; // Ajusta la ruta
-import RutasScreen from 'components/RutasScreen';
+import { ScreenContent } from '@/screens/ScreenContent'; // Ajusta la ruta
+import RutasScreen from '@/screens/RutasScreen';
+import Button from '@/components/Button';
 
 // icon library from expo (already included with expo)
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-
 // 1. Definimos las pantallas (puedes moverlas a archivos separados luego)
 const InicioScreen = () => (
   <ScreenContent title="Inicio" path="screens/Inicio.tsx">
-    <Text className="mt-4 text-gray-600">Bienvenido a TuzoRutas</Text>
+    <Text className="mt-6 text-gray-600">Bienvenido a TuzoRutas</Text>
+    <Text className="bg-gray text-gray mt-8 p-4 ">Bienvenido a TuzoRutas</Text>
   </ScreenContent>
 );
-
 
 const AjustesScreen = () => (
   <ScreenContent title="Ajustes" path="screens/Ajustes.tsx">
     <Text className="mt-4 text-gray-600">Configuración de la app</Text>
+
+
+// Contained button (default)
+    <Button onPress={() => console.log('Pressed')}>Save</Button>
+
+// Outlined variant
+    <Button className='mt-4' variant="outlined" onPress={() => console.log('Pressed')}>Cancel</Button>
+
+    <Button className='mt-4' variant="text" onPress={() => console.log('Pressed')}>Cancel</Button>
+    <Button className='mt-4' color="secondary" onPress={() => console.log('Pressed')}>Cancel</Button>
+    <Button className='mt-4' variant="outlined" disabled onPress={() => console.log('Pressed')}>Cancel</Button>
+
   </ScreenContent>
 );
 
@@ -31,11 +44,10 @@ export default function App() {
       <Tab.Navigator
         screenOptions={{
           headerShown: false, // Oculta el título superior por defecto
-          tabBarStyle: { backgroundColor: '#ffffff', height: 60 },
+          tabBarStyle: { backgroundColor: '#000000', height: 60 },
           tabBarActiveTintColor: '#800000', // Un color guinda tipo Tuzobús
           tabBarInactiveTintColor: 'gray',
-        }}
-      >
+        }}>
         <Tab.Screen
           name="Inicio"
           component={InicioScreen}
@@ -43,17 +55,15 @@ export default function App() {
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="home" size={size} color={color} />
             ),
-            tabBarLabel: 'Home'
+            tabBarLabel: 'Home',
           }}
         />
         <Tab.Screen
           name="Rutas"
           component={RutasScreen}
           options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialIcons name="map" size={size} color={color} />
-            ),
-            tabBarLabel: 'Mapa'
+            tabBarIcon: ({ color, size }) => <MaterialIcons name="map" size={size} color={color} />,
+            tabBarLabel: 'Mapa',
           }}
         />
         <Tab.Screen
@@ -63,7 +73,7 @@ export default function App() {
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="settings" size={size} color={color} />
             ),
-            tabBarLabel: 'Ajustes'
+            tabBarLabel: 'Ajustes',
           }}
         />
       </Tab.Navigator>

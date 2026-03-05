@@ -1,5 +1,6 @@
 import React from 'react';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline, UrlTile } from 'react-native-maps';
+
 import { View, StyleSheet } from 'react-native';
 
 const RutasScreen = () => {

@@ -6,8 +6,7 @@ interface EditScreenInfoProps {
 
 export const EditScreenInfo: React.FC<EditScreenInfoProps> = ({ path }) => {
   const title = 'Hello World';
-  const description =
-    'Change any of the text, save the file, and your app will automatically .';
+  const description = 'Change any of the text, save the file, and your app will automatically .';
 
   return (
     <View>
@@ -16,7 +15,7 @@ export const EditScreenInfo: React.FC<EditScreenInfoProps> = ({ path }) => {
         <View className={`${styles.codeHighlightContainer} ${styles.homeScreenFilename}`}>
           <Text>{path}</Text>
         </View>
-        <Text className={styles.getStartedText} >{description}</Text>
+        <Text className={styles.getStartedText}>{description}</Text>
       </View>
     </View>
   );
