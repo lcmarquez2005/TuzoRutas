@@ -34,10 +34,6 @@ const RutasScreen = () => {
   return (
     <View style={styles.container}>
 
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerText}>TuzoRutas</Text>
-      </View>
 
       {/* Menu de rutas */}
       <ScrollView
