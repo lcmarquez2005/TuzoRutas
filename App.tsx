@@ -6,35 +6,12 @@ import { View, Text } from 'react-native';
 import { ScreenContent } from '@/screens/ScreenContent'; // Ajusta la ruta
 import RutasScreen from '@/screens/RutasScreen';
 import Button from '@/components/Button';
-
+import InicioScreen from '@/screens/InicioScreen'
+import { AjustesScreen } from '@/screens/AjustesScreen';
 // icon library from expo (already included with expo)
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-// 1. Definimos las pantallas (puedes moverlas a archivos separados luego)
-const InicioScreen = () => (
-  <ScreenContent title="Inicio" path="screens/Inicio.tsx">
-    <Text className="mt-6 text-gray-600">Bienvenido a TuzoRutas</Text>
-    <Text className="bg-gray text-gray mt-8 p-4 ">Bienvenido a TuzoRutas</Text>
-  </ScreenContent>
-);
 
-const AjustesScreen = () => (
-  <ScreenContent title="Ajustes" path="screens/Ajustes.tsx">
-    <Text className="mt-4 text-gray-600">Configuración de la app</Text>
-
-
-// Contained button (default)
-    <Button onPress={() => console.log('Pressed')}>Save</Button>
-
-// Outlined variant
-    <Button className='mt-4' variant="outlined" onPress={() => console.log('Pressed')}>Cancel</Button>
-
-    <Button className='mt-4' variant="text" onPress={() => console.log('Pressed')}>Cancel</Button>
-    <Button className='mt-4' color="secondary" onPress={() => console.log('Pressed')}>Cancel</Button>
-    <Button className='mt-4' variant="outlined" disabled onPress={() => console.log('Pressed')}>Cancel</Button>
-
-  </ScreenContent>
-);
 
 const Tab = createBottomTabNavigator();
 
