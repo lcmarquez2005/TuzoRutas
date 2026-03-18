@@ -4,12 +4,11 @@ import { Text, View } from 'react-native';
 
 
 interface ScreenContentProps {
-  title: string;
-  path: string;
   children?: React.ReactNode;
+  path: string;
 }
 
-export const ScreenContent: React.FC<ScreenContentProps> = ({ title, path, children }) => {
+export const ScreenContent: React.FC<ScreenContentProps> = ({  path, children }) => {
   return (
     <View className="flex-1 items-center justify-center bg-white">
       {/* <Text className="text-xl font-bold">{title}</Text>

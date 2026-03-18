@@ -19,71 +19,63 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   className,
 }) => {
-  const baseClasses = 'px-4 py-2 rounded-md items-center justify-center min-h-[36px]';
-
-  const variantClasses = {
-    contained: 'bg-blue-500',
-    outlined: 'border border-blue-500 bg-transparent',
-    text: 'bg-transparent',
-  };
-
-  const colorClasses = {
-    primary: {
-      contained: 'bg-blue-500',
-      outlined: 'border-blue-500',
-      text: 'text-blue-500',
+  // 1. Lógica de colores centralizada
+  const variants = {
+    contained: {
+      primary: 'bg-black',
+      secondary: 'bg-gray-600',
     },
-    secondary: {
-      contained: 'bg-gray-500',
-      outlined: 'border-gray-500',
-      text: 'text-gray-500',
+    outlined: {
+      primary: 'border border-black bg-transparent',
+      secondary: 'border border-gray-600 bg-transparent',
+    },
+    text: {
+      primary: 'bg-transparent',
+      secondary: 'bg-transparent',
     },
   };
 
-  const textColorClasses = {
+  const textColors = {
     contained: 'text-white',
-    outlined: 'text-blue-500',
-    text: 'text-blue-500',
+    outlined: color === 'primary' ? 'text-black' : 'text-gray-600',
+    text: color === 'primary' ? 'text-black' : 'text-gray-600',
   };
 
-  const disabledClasses = disabled ? 'opacity-50' : '';
-
-  const buttonClasses = cn(
-    baseClasses,
-    variantClasses[variant],
-    colorClasses[color][variant],
-    disabledClasses,
+  // 2. Clases del contenedor principal (Controla posición y bordes)
+  const containerClasses = cn(
+    'rounded-md overflow-hidden', // Importante para el ripple en Android
+    disabled && 'opacity-50',
     className
   );
 
-  const textClasses = cn(
-    'text-sm font-medium',
-    textColorClasses[variant],
-    disabled ? 'text-gray-400' : ''
+  // 3. Clases del contenido (Controla el diseño visual del botón)
+  const contentClasses = cn(
+    'px-4 py-2 items-center justify-center min-h-[44px] flex-row',
+    variants[variant][color]
   );
 
-  const TouchableComponent = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+  const textClasses = cn(
+    'text-sm font-bold',
+    textColors[variant],
+    disabled && 'text-gray-400'
+  );
 
-  const touchableProps =
-    Platform.OS === 'android'
-      ? {
-          background: TouchableNativeFeedback.Ripple('rgba(255, 255, 255, 0.3)', false),
-          useForeground: true,
-        }
-      : {
-          activeOpacity: 0.7,
-        };
+  const isAndroid = Platform.OS === 'android';
+  const Touchable = isAndroid ? TouchableNativeFeedback : TouchableOpacity;
 
   return (
-    <View className={buttonClasses}>
-      <TouchableComponent
-        onPress={disabled ? undefined : onPress}
+    <View className={containerClasses}>
+      <Touchable
+        onPress={onPress}
         disabled={disabled}
-        {...touchableProps}>
-        <View className="items-center justify-center px-4 py-2">
+        background={isAndroid ? TouchableNativeFeedback.Ripple('rgba(255, 255, 255, 0.3)', false) : undefined}
+        activeOpacity={0.7}
+      >
+        {/* Este View interno es el que realmente "dibuja" el botón */}
+        <View className={contentClasses}>
           <Text className={textClasses}>{children}</Text>
         </View>
-      </TouchableComponent>
+      </Touchable>
     </View>
   );
 };
