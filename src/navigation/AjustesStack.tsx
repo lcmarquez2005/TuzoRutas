@@ -17,7 +17,7 @@ export const AjustesStack = () => {
       }}
     >
       <Stack.Screen 
-        name="AjustesHome" 
+        name="AjustesScreen" 
         component={AjustesScreen} 
         options={{ title: 'Configuración' }} 
       />

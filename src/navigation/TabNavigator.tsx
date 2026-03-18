@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import InicioScreen from '../screens/InicioScreen';
 import RutasScreen from '../screens/RutasScreen';
-import AjustesScreen from '../screens/AjustesScreen';
+
 
 import { AjustesStack } from './AjustesStack';
 

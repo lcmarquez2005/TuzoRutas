@@ -4,7 +4,7 @@ import { ScreenContent } from './ScreenContent';
 import Button from '@/components/Button';
 
 const AjustesScreen = ({ navigation }: any) => (
-  <ScreenContent title="Ajustes" path="screens/Ajustes.tsx">
+  <ScreenContent title="Ajustes" path="screens/AjustesScreen.tsx">
     <Text className="mt-4 text-gray-600">Configuración de la app</Text>
     <Button 
       className='mt-4' 
