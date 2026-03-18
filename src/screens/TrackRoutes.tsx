@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Button, StyleSheet, Text } from "react-native";
+import { View, Button, StyleSheet, Text, Pressable } from "react-native";
 import MapView, { Polyline, Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { LatLng } from "react-native-maps";
@@ -13,6 +13,8 @@ const TrackRoutes = () => {
 
     const [currentLocation, setCurrentLocation] = useState<LatLng | null>(null);
     const [distance, setDistance] = useState(0);
+
+    const mapRef = useRef<MapView | null>(null);
 
     // pedir permisos
     const requestLocationPermission = async () => {
@@ -42,6 +44,8 @@ const TrackRoutes = () => {
                 const newPoint = { latitude, longitude };
 
                 setCurrentLocation(newPoint);
+
+                centerMap(newPoint);
 
                 setRouteCoords((prev) => {
                     if (prev.length > 0) {
@@ -93,6 +97,13 @@ const TrackRoutes = () => {
         return R * c;
     };
 
+    const centerMap = (location: LatLng) => {
+        mapRef.current?.animateCamera({
+            center: location,
+            zoom: 17,
+        });
+    };
+
     return (
         <View style={styles.container}>
 
@@ -106,12 +117,13 @@ const TrackRoutes = () => {
                     borderRadius: 10,
                 }}
             >
-                <Text>
-                    Distancia: {(distance / 1000).toFixed(2)} km
-                </Text>
             </View>
+            <Text>
+                Distancia: {(distance / 1000).toFixed(2)} km
+            </Text>
 
             <MapView
+                ref={mapRef}
                 style={styles.map}
                 initialRegion={{
                     latitude: 20.1011,
@@ -138,6 +150,17 @@ const TrackRoutes = () => {
             <View style={styles.buttons}>
                 <Button title="Iniciar ruta" onPress={startTracking} />
                 <Button title="Detener ruta" onPress={stopTracking} />
+
+
+            </View>
+
+            <View>
+                <Pressable
+                    className="absolute bottom-[180px] right-5 bg-white p-2.5 rounded-lg"
+                    onPress={() => currentLocation && centerMap(currentLocation)}
+                >
+                    <Text>|o|</Text>
+                </Pressable>
             </View>
 
         </View>
