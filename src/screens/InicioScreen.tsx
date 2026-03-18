@@ -1,59 +1,69 @@
-
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { View, StyleSheet, Text } from 'react-native';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Text, View } from 'react-native';
+import { ScreenContent } from './ScreenContent';
+import Button from '@/components/Button';
 
-import { ScreenContent } from '@/screens/ScreenContent'; // Ajusta la ruta
+const InicioScreen = () => (
+    <ScreenContent title='Inicio' path='screens/InicioScreen.tsx' >
+        <View className='flex-1 px-5 pt-10'>
+            {/* Header */}
+            <View >
+                <Text className="text-3xl font-bold text-gray-900">
+                    TuzoRutas
+                </Text>
+                <Text className="text-gray-500 mt-1">
+                    Movilidad inteligente en Pachuca
+                </Text>
+            </View>
 
-const RutasScreen = () => {
-    // Coordenadas de Pachuca de Soto, Hidalgo
 
-    return (
-        <ScreenContent path=''  >
+            {/* Tarjeta principal */}
+            <View className="mt-6 bg-blue-500 rounded-2xl p-5 shadow-md">
+                <Text className="text-white text-lg font-semibold">
+                    Bienvenido
+                </Text>
+                <Text className="text-white mt-2">
+                    Consulta rutas, ubica transporte y optimiza tus traslados en tiempo real.
+                </Text>
+            </View>
 
+            {/* Tarjetas tipo dashboard */}
+            <View className="mt-6 gap-4">
 
-            <Card className="w-full max-w-sm mt-10 ">
-                <CardHeader className="flex-row">
-                    <View className="flex-1 gap-1.5">
-                        <CardTitle className='h2'>Subscribe to our newsletter</CardTitle>
-                        <CardDescription>Enter your details to receive updates and tips</CardDescription>
-                    </View>
-                </CardHeader>
-                <CardContent>
-                    <View className="w-full justify-center gap-4">
-                        <View className="gap-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input id="email" placeholder="m@example.com" />
-                        </View>
-                        <View className="gap-2">
-                            <Label htmlFor="name">Name</Label>
-                            <Input id="name" placeholder="John Doe" />
-                        </View>
-                    </View>
-                </CardContent>
-                <CardFooter className="flex-col gap-2">
-                    <Button className='mt-4' variant={'outline'} onPress={() => console.log('Pressed')}>
-                        <Text>Later</Text>
-                    </Button>
-                    <Button className='mt-4' variant={'link'} onPress={() => console.log('Pressed')}>
-                        <Text>Later</Text>
-                    </Button>
-                    <Button className='mt-4' variant={'default'} onPress={() => console.log('Pressed')}>
-                        <Text>Later</Text>
-                    </Button>
-                </CardFooter>
-            </Card>
-        </ScreenContent>
-    );
-};
+                {/* Ubicación */}
+                <View className="bg-white rounded-2xl p-4 shadow-sm">
+                    <Text className="text-gray-400 text-sm">
+                        Tu ubicación
+                    </Text>
+                    <Text className="text-gray-800 font-semibold mt-1">
+                        Detectando ubicación...
+                    </Text>
+                </View>
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});
+                {/* Estado de rutas */}
+                <View className="bg-white rounded-2xl p-4 shadow-sm">
+                    <Text className="text-gray-400 text-sm">
+                        Estado de rutas
+                    </Text>
+                    <Text className="text-gray-800 font-semibold mt-1">
+                        5 rutas disponibles cercanas
+                    </Text>
+                </View>
 
-export default RutasScreen;
+                {/* Sugerencia */}
+                <View className="bg-white rounded-2xl p-4 shadow-sm">
+                    <Text className="text-gray-400 text-sm">
+                        Recomendación
+                    </Text>
+                    <Text className="text-gray-800 font-semibold mt-1">
+                        Usa el mapa para ver rutas en tiempo real
+                    </Text>
+                </View>
+
+            </View>
+
+        </View>
+    </ScreenContent>
+);
+
+export default InicioScreen;
