@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 
 
 interface ScreenContentProps {
+  title?: string;
   children?: React.ReactNode;
   path: string;
 }
