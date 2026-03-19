@@ -4,7 +4,7 @@ import { ScreenContent } from './ScreenContent';
 import Button from '@/components/Button';
 
 const InicioScreen = () => (
-    <ScreenContent title='Inicio' path='screens/InicioScreen.tsx' >
+    <ScreenContent  path='screens/InicioScreen.tsx' >
         <View className='flex-1 px-5 pt-10'>
             {/* Header */}
             <View >
