@@ -21,7 +21,7 @@ const InicioScreen = () => {
 
                 {/* HEADER CARD */}
                 <View className='px-5 pt-10'>
-                    <View className='bg-green-300 rounded-2xl p-5 shadow-sm'>
+                    <View className='bg-green-400 rounded-2xl p-5 shadow-sm'>
                         <Text className="text-3xl font-bold text-gray-900">
                             TuzoRutas
                         </Text>
