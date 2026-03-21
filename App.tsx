@@ -10,7 +10,6 @@ import { ScreenContent } from '@/screens/ScreenContent'; // Ajusta la ruta
 import RutasScreen from '@/screens/RutasScreen';
 import Button from '@/components/Button';
 import InicioScreen from '@/screens/InicioScreen'
-import { AjustesScreen } from '@/screens/AjustesScreen';
 // icon library from expo (already included with expo)
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
