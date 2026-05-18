@@ -1,14 +1,31 @@
 import React from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useRef, useState } from "react"; // para guardar la ruta seleccionada y para que se tenga la referencia directa al mapa para moverlo o que se centre
+import { useRef, useState, useEffect } from "react"; 
+import { ActivityIndicator, Alert } from "react-native";
 
-import { rutas } from "../data/rutas";
+import { obtenerRutasDelServidor } from "../services/api";
 import { Ruta } from "../types/types";
 
 const RutasScreen = () => {
   const [rutaActiva, setRutaActiva] = useState<Ruta | null>(null); // Es la ruta actualmente mostrada en el mapa y cambia a la otra ruta seleccionada, null para cuando abramos la app y no muestre ninguna ruta
+  const [rutas, setRutas] = useState<Ruta[]>([]);
+  const [cargando, setCargando] = useState<boolean>(true);
   const mapRef = useRef<MapView | null>(null); // CONTROLA LA REFERNECIA DEL MAPA DESDE EL CODIGO NO SE Si LO USAREMOS
+
+  useEffect(() => {
+    const cargarRutas = async () => {
+      try {
+        const datos = await obtenerRutasDelServidor();
+        setRutas(datos);
+      } catch (error) {
+        Alert.alert("Error de Conexión", "No se pudieron cargar las rutas desde el servidor.");
+      } finally {
+        setCargando(false);
+      }
+    };
+    cargarRutas();
+  }, []);
 
   // Funcion de cuando se selecciona la ruta
   const seleccionarRuta = (ruta: Ruta) => {
@@ -30,6 +47,15 @@ const RutasScreen = () => {
       );
     }
   };
+
+  if (cargando) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color="#800000" />
+        <Text style={{ marginTop: 10, color: 'gray' }}>Descargando rutas del servidor...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

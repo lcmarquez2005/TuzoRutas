@@ -13,6 +13,7 @@ export interface Ruta {
     id: string;
     nombre: string;
     color: string;
+    distancia_km?: number;
     trayectoria: {
         lat: number;
         lng: number;
