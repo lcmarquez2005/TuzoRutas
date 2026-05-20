@@ -1,12 +1,15 @@
 import { Ruta } from '../types/types';
 
-// URL de Ngrok para pruebas en celular físico
-const API_URL = 'https://tuzorutas-backend.onrender.com/api';
+// URL de Ngrok para desarrollo local y pruebas en celular físico
+const API_URL = 'https://2d89-187-189-214-200.ngrok-free.app/api';
 
 export const loginUsuario = async (
   usuario: string,
   password: string
 ): Promise<{ token: string; usuario: any }> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos de timeout
+
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
@@ -15,7 +18,10 @@ export const loginUsuario = async (
         'ngrok-skip-browser-warning': 'true',
       },
       body: JSON.stringify({ usuario, password }),
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
@@ -23,7 +29,11 @@ export const loginUsuario = async (
     }
 
     return await response.json();
-  } catch (error) {
+  } catch (error: any) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      throw new Error('El servidor tardó demasiado en responder. Verifica tu conexión e IP.');
+    }
     console.error("Error en loginUsuario:", error);
     throw error;
   }

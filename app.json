@@ -35,6 +35,7 @@
     },
     "android": {
       "package": "com.lcmarquez.tuzorutas",
+      "usesCleartextTraffic": true,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

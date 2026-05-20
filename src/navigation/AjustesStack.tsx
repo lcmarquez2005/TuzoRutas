@@ -11,20 +11,32 @@ export const AjustesStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#800000' }, // Guinda Tuzobús
-        headerTintColor: '#fff',
-        headerTitleStyle: { fontWeight: 'bold' },
+        headerTransparent: true,
+        headerTitle: "",
+        headerTintColor: '#1f2937', // Dark gray
+        headerBackTitleVisible: false,
+        headerStyle: { backgroundColor: 'transparent' },
+        headerShadowVisible: false,
       }}
     >
       <Stack.Screen 
         name="AjustesScreen" 
         component={AjustesScreen} 
-        options={{ title: 'Configuración' }} 
+        options={{ 
+          headerShown: false // Lo manejaremos internamente para un look más limpio
+        }} 
       />
       <Stack.Screen 
         name="Track" 
         component={TrackRoutes} 
-        options={{ title: 'Trazar Ruta' }} 
+        options={{ 
+          title: 'Trazar Nueva Ruta',
+          headerTransparent: false,
+          headerTitle: 'Trazar Nueva Ruta',
+          headerShown: true,
+          headerStyle: { backgroundColor: 'white' },
+          headerTitleStyle: { fontWeight: 'bold', color: '#1f2937' },
+        }} 
       />
     </Stack.Navigator>
   );

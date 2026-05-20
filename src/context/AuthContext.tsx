@@ -32,14 +32,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loadStorageData();
   }, []);
 
-  async function signIn(usuario: string, password: string) {
-    const response = await loginUsuario(usuario, password);
+  async function signIn(usuarioInput: string, password: string) {
+    const response = await loginUsuario(usuarioInput, password);
 
-    setToken(response.token);
-    setUsuario(response.usuario);
+    const tokenData = response.token;
+    // Si el servidor no devuelve el objeto usuario, creamos uno básico o lo extraemos si es posible
+    const usuarioData = response.usuario || { usuario: usuarioInput, id: 'temp' };
 
-    await AsyncStorage.setItem('@TuzoRutas:token', response.token);
-    await AsyncStorage.setItem('@TuzoRutas:usuario', JSON.stringify(response.usuario));
+    setToken(tokenData);
+    setUsuario(usuarioData);
+
+    await AsyncStorage.setItem('@TuzoRutas:token', tokenData);
+    await AsyncStorage.setItem('@TuzoRutas:usuario', JSON.stringify(usuarioData));
   }
 
   async function signOut() {

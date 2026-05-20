@@ -7,7 +7,6 @@ Este documento define el contrato de comunicación oficial entre la aplicación 
 ## 🌍 URL Base del Servidor
 
 * **Desarrollo (Local en PC)**: `http://localhost:3000/api`
-* **Desarrollo (Pruebas en Celular Físico)**: Usar URL de túnel como Ngrok (ej: `https://tu-subdominio.ngrok-free.app/api`)
 * **Producción**: `[Pendiente de definir]`
 
 ---
