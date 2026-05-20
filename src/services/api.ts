@@ -1,7 +1,7 @@
 import { Ruta } from '../types/types';
 
 // URL de Ngrok para desarrollo local y pruebas en celular físico
-const API_URL = 'https://2d89-187-189-214-200.ngrok-free.app/api';
+const API_URL = 'https://tuzorutas-backend.onrender.com/api';
 
 export const loginUsuario = async (
   usuario: string,
