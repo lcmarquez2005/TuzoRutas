@@ -1,27 +1,21 @@
 import React from 'react';
 import './global.css';
 import { NavigationContainer } from '@react-navigation/native';
-
-import { TabNavigator } from './src/navigation/TabNavigator';
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native';
-import { ScreenContent } from '@/screens/ScreenContent'; // Ajusta la ruta
-import RutasScreen from '@/screens/RutasScreen';
-import Button from '@/components/Button';
-import InicioScreen from '@/screens/InicioScreen'
-import { AjustesScreen } from '@/screens/AjustesScreen';
-// icon library from expo (already included with expo)
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-
-
-const Tab = createBottomTabNavigator();
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AuthProvider } from './src/context/AuthContext';
+import { RootNavigator } from './src/navigation/RootNavigator';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <AuthProvider>
+            <RootNavigator />
+          </AuthProvider>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
